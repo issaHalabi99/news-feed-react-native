@@ -1,11 +1,10 @@
 import Post from "../../models/Post";
 
-import { GET_DATA, ADD_DATA, GET_ITEM } from "../actions/Post";
+import { GET_DATA, ADD_DATA } from "../actions/Post";
 
 const initialState = {
   newsFeed: [],
   nbOfPage: 0,
-  newItem: {}
 };
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -33,13 +32,6 @@ const postReducer = (state = initialState, action) => {
         ...state,
         nbOfPage: state.nbOfPage + 1,
       };
-
-      case GET_ITEM:
-        const index = state.newsFeed.findIndex((it) => it.id === action.id);
-        return {
-          ...state,
-          newItem: state.newsFeed[index]
-        };
     default:
       return state;
   }
