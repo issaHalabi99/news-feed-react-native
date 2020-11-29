@@ -1,9 +1,10 @@
 import Post from "../../models/Post";
 
-import { GET_DATA } from "../actions/Post";
+import { GET_DATA, ADD_DATA } from "../actions/Post";
 
 const initialState = {
   newsFeed: [],
+  nbOfPage: 0,
 };
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,9 +24,14 @@ const postReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        newsFeed: state.newsFeed.concat(data)
+        newsFeed: state.newsFeed.concat(data),
       };
 
+    case ADD_DATA:
+      return {
+        ...state,
+        nbOfPage: state.nbOfPage + 1,
+      };
     default:
       return state;
   }

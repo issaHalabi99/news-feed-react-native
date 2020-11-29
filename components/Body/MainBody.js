@@ -1,38 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { ListItem, Thumbnail, Text, Left, Body } from "native-base";
 import {
-  View,
-  ActivityIndicator,
   TouchableOpacity,
-  StyleSheet,
+  TouchableNativeFeedback,
+  Platform,
+  View,
 } from "react-native";
-
-import * as ordersActions from "../../store/actions/Post";
-
-import { useSelector, useDispatch } from "react-redux";
+import { ListItem, Thumbnail, Text, Left, Body, Toast } from "native-base";
 
 const MainBody = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  //   const posts = useSelector((state) => state.orders.orders);
-  const dispatch = useDispatch();
+  let TouchableCmp = TouchableOpacity;
 
-  useEffect(() => {
-    setIsLoading(true);
-    dispatch(ordersActions.getData()).then(() => {
-      setIsLoading(false);
-    });
-  }, [dispatch]);
-
-  if (isLoading) {
-    return (
-      <View style={styles.centered}>
-        <ActivityIndicator size="large" color="" />
-      </View>
-    );
+  if (Platform.OS === "android" && Platform.Version >= 21) {
+    TouchableCmp = TouchableNativeFeedback;
   }
-
   return (
-    <TouchableOpacity onPress={() => {}}>
+    <TouchableCmp onPress={() => {}} useForeground>
       <ListItem thumbnail>
         <Left>
           <Thumbnail
@@ -43,22 +25,14 @@ const MainBody = (props) => {
           />
         </Left>
         <Body>
-          <Text>{props.title}</Text>
+          <Text>{props.title ? props.title : "NO Data Found"}</Text>
           <Text note numberOfLines={1}>
-            {props.desc}
+            {props.desc ? props.desc : "NO Data Found"}
           </Text>
         </Body>
       </ListItem>
-    </TouchableOpacity>
+    </TouchableCmp>
   );
 };
-
-const styles = StyleSheet.create({
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default MainBody;

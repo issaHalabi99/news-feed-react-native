@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Root } from "native-base";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,7 +18,7 @@ const rootreducer = combineReducers({
 const looger = (store) => {
   return (next) => {
     return (action) => {
-     // console.log("[Middleware] Dispatching", action);
+      // console.log("[Middleware] Dispatching", action);
       const result = next(action);
       console.log("[Middleware] next state", store.getState());
       return result;
@@ -51,7 +51,9 @@ export default function App() {
   }
   return (
     <Provider store={store}>
-      <Layout />
+      <Root>
+        <Layout />
+      </Root>
     </Provider>
   );
 }
