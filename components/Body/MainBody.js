@@ -14,7 +14,10 @@ const MainBody = (props) => {
     TouchableCmp = TouchableNativeFeedback;
   }
   return (
-    <TouchableCmp onPress={() => {}} useForeground>
+    <TouchableCmp
+      onPress={ () =>  props.touchedHandler(props.id) }
+      useForeground
+    >
       <ListItem thumbnail>
         <Left>
           <Thumbnail

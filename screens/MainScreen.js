@@ -6,16 +6,19 @@ import {
   FlatList,
   StyleSheet,
 } from "react-native";
-import { Toast } from "native-base";
 
 import * as ordersActions from "../store/actions/Post";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import MainBody from "../components/Body/MainBody";
+import MainModal from "../components/Modal/MainModal";
 
 const MainScreen = (props) => {
+  const [isAddMode, setIsAddMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [openItem, setOpenItem] = useState({});
+
   const data = useSelector((state) => state.posts.newsFeed);
   const dispatch = useDispatch();
 
@@ -25,6 +28,12 @@ const MainScreen = (props) => {
       setIsLoading(false);
     });
   }, [dispatch]);
+
+  const touchedHandler = (id) => {
+    const index = data.findIndex((it) => it.id === id);
+    setOpenItem(data[index]);
+    setIsAddMode(true)
+  };
 
   if (isLoading) {
     return (
@@ -36,11 +45,18 @@ const MainScreen = (props) => {
 
   return (
     <View style={{ flex: 1 }}>
+      <MainModal
+        visible={isAddMode}
+        data={openItem}
+        setIsAddMode={setIsAddMode}
+      />
       <FlatList
         keyExtractor={(item) => item.id}
         data={data}
         renderItem={(d) => (
           <MainBody
+            touchedHandler={touchedHandler}
+            id={d.item.id}
             title={d.item.title}
             desc={d.item.description}
             uri={

@@ -2,10 +2,16 @@ import axios from "../../axios-instance/axios-news";
 
 export const GET_DATA = "GET_DATA";
 export const ADD_DATA = "ADD_DATA";
+export const GET_ITEM = "GET_ITEM";
 
 export const addData = () => {
   return { type: ADD_DATA };
 }
+
+export const getItem = (id) => {
+  return { type: GET_ITEM, id: id };
+}
+
 
 export const getData = () => {
   return async (dispatch, getState) => {
