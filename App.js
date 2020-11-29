@@ -11,11 +11,22 @@ import ReduxThunk from "redux-thunk";
 import PostReducer from "./store/reducers/Post";
 import Layout from "./hoc/Layout/Layout";
 
-// const rootreducer = combineReducers({
-//   posts: PostReducer,
-// });
+const rootreducer = combineReducers({
+  posts: PostReducer,
+});
 
-// const store = createStore(rootreducer, applyMiddleware(ReduxThunk));
+const looger = (store) => {
+  return (next) => {
+    return (action) => {
+     // console.log("[Middleware] Dispatching", action);
+      const result = next(action);
+      console.log("[Middleware] next state", store.getState());
+      return result;
+    };
+  };
+};
+
+const store = createStore(rootreducer, applyMiddleware(looger, ReduxThunk));
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -39,9 +50,8 @@ export default function App() {
     );
   }
   return (
-    // <Provider store={store}>
-
-    // </Provider>
-    <Layout />
+    <Provider store={store}>
+      <Layout />
+    </Provider>
   );
 }
