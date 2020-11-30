@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import MainHeader from "../../components/MainHeader/MainHeader";
 import MainScreen from "../../screens/MainScreen";
@@ -13,10 +13,11 @@ import { useDispatch } from "react-redux";
 
 import { debounce } from "../../components/debounce";
 
-import withErrorHandler from "../hoc/withErrorHandler/withErrorHandler";
-import axios from "../axios-instance/axios-news";
+import withErrorHandler from "../withErrorHandler/withErrorHandler";
+import axios from "../../axios-instance/axios-news";
 
 const Layout = () => {
+  const [spin, setSpin] = useState(false);
   const dispatch = useDispatch();
 
   return (
@@ -39,7 +40,9 @@ const Layout = () => {
                     onChangeText={debounce((value) => {
                       dispatch(ordersActions.isSearch(true));
                       dispatch(ordersActions.valueHandler(value));
-                      dispatch(ordersActions.getData());
+                      dispatch(ordersActions.getData()).then(() => {
+                        setSpin(false);
+                      });
                     }, 3000)}
                   />
                   <Icon name="ios-people" />
@@ -66,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withErrorHandler(Layout, axios);;
+export default withErrorHandler(Layout, axios);

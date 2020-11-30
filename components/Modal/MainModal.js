@@ -1,5 +1,4 @@
 import React from "react";
-
 import { View, Image, Modal, StyleSheet } from "react-native";
 import {
   Container,
@@ -11,8 +10,9 @@ import {
   Icon,
   Body,
 } from "native-base";
-
 import PropTypes from "prop-types";
+
+//import Share from "react-native-share";
 
 const MainModal = (props) => {
   return (
@@ -51,7 +51,10 @@ const MainModal = (props) => {
 
             <CardItem footer bordered>
               <View style={styles.centered}>
-                <Button transparent textStyle={{ color: "#87838B" }}>
+                <Button
+                  transparent
+                  textStyle={{ color: "#87838B" }}
+                >
                   <Icon name="share" />
                 </Button>
                 <Button

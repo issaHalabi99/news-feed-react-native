@@ -14,7 +14,7 @@ const postReducer = (state = initialState, action) => {
       let data = [];
       action.data.forEach((el, index) => {
         let item = new Post(
-          el._id,
+          el._id+Math.random(),
           el.headline.main,
           el.multimedia[5],
           el.abstract,
