@@ -15,9 +15,9 @@ import {
   Separator,
 } from "native-base";
 
-const MainModal = (props) => {
-  // const data = useSelector((state) => state.posts.newItem);
+import PropTypes from "prop-types";
 
+const MainModal = (props) => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <Container
@@ -80,5 +80,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
+MainModal.propTypes = {
+  visible: PropTypes.bool,
+  data: PropTypes.object,
+  setIsAddMode: PropTypes.func,
+};
 
 export default MainModal;

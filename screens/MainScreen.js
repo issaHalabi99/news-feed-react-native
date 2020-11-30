@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainBody from "../components/Body/MainBody";
 import MainModal from "../components/Modal/MainModal";
 
-const MainScreen = (props) => {
+const MainScreen = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [openItem, setOpenItem] = useState({});

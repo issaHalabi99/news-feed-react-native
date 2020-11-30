@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 
 import { debounce } from "../../components/debounce";
 
-const Layout = (props) => {
+const Layout = () => {
   const dispatch = useDispatch();
 
   return (

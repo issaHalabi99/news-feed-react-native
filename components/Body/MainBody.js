@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
-  View,
 } from "react-native";
 import { ListItem, Thumbnail, Text, Left, Body, Toast } from "native-base";
+
+import PropTypes from "prop-types";
 
 const MainBody = (props) => {
   let TouchableCmp = TouchableOpacity;
@@ -36,6 +37,14 @@ const MainBody = (props) => {
       </ListItem>
     </TouchableCmp>
   );
+};
+
+MainBody.propTypes = {
+  touchedHandler: PropTypes.func,
+  title: PropTypes.string,
+  desc: PropTypes.string,
+  uri: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default MainBody;
