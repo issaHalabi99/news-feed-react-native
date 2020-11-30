@@ -14,6 +14,9 @@ import { useSelector, useDispatch } from "react-redux";
 import MainBody from "../components/Body/MainBody";
 import MainModal from "../components/Modal/MainModal";
 
+import withErrorHandler from "../hoc/withErrorHandler/withErrorHandler";
+import axios from "../axios-instance/axios-news";
+
 const MainScreen = () => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,12 +32,10 @@ const MainScreen = () => {
     });
   }, [dispatch]);
 
- 
-
   const touchedHandler = (id) => {
     const index = data.findIndex((it) => it.id === id);
     setOpenItem(data[index]);
-    setIsAddMode(true)
+    setIsAddMode(true);
   };
 
   if (isLoading) {
@@ -46,7 +47,6 @@ const MainScreen = () => {
   }
 
   return (
-   
     <View style={{ flex: 1 }}>
       <MainModal
         visible={isAddMode}
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default withErrorHandler(MainScreen, axios);

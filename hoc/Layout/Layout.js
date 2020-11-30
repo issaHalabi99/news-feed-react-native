@@ -13,6 +13,9 @@ import { useDispatch } from "react-redux";
 
 import { debounce } from "../../components/debounce";
 
+import withErrorHandler from "../hoc/withErrorHandler/withErrorHandler";
+import axios from "../axios-instance/axios-news";
+
 const Layout = () => {
   const dispatch = useDispatch();
 
@@ -63,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Layout;
+export default withErrorHandler(Layout, axios);;

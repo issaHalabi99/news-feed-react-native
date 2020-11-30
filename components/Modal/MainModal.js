@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 
 import { View, Image, Modal, StyleSheet } from "react-native";
 import {
   Container,
-  Header,
   Content,
   Card,
   CardItem,
@@ -12,7 +10,6 @@ import {
   Button,
   Icon,
   Body,
-  Separator,
 } from "native-base";
 
 import PropTypes from "prop-types";
