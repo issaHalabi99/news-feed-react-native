@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Modal, StyleSheet } from "react-native";
+import { View, Image, Modal, StyleSheet, Share } from "react-native";
 import {
   Container,
   Content,
@@ -12,9 +12,19 @@ import {
 } from "native-base";
 import PropTypes from "prop-types";
 
-//import Share from "react-native-share";
-
 const MainModal = (props) => {
+  const shareMessage = () => {
+    //Here is the Share API
+    const link = props.title;
+    Share.share({
+      message: `Link: ${link}`,
+    })
+      //after successful share return result
+      .then((result) => console.log(result))
+      //If any thing goes wrong it comes here
+      .catch((errorMsg) => console.log(errorMsg));
+  };
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <Container
@@ -52,6 +62,7 @@ const MainModal = (props) => {
             <CardItem footer bordered>
               <View style={styles.centered}>
                 <Button
+                  onPress={shareMessage}
                   transparent
                   textStyle={{ color: "#87838B" }}
                 >
