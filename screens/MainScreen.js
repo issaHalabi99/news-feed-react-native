@@ -29,6 +29,8 @@ const MainScreen = (props) => {
     });
   }, [dispatch]);
 
+ 
+
   const touchedHandler = (id) => {
     const index = data.findIndex((it) => it.id === id);
     setOpenItem(data[index]);
@@ -44,6 +46,7 @@ const MainScreen = (props) => {
   }
 
   return (
+   
     <View style={{ flex: 1 }}>
       <MainModal
         visible={isAddMode}

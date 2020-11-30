@@ -1,10 +1,12 @@
 import Post from "../../models/Post";
 
-import { GET_DATA, ADD_DATA } from "../actions/Post";
+import { GET_DATA, ADD_DATA, IS_SEARCH, INPUT_VALUE } from "../actions/Post";
 
 const initialState = {
   newsFeed: [],
   nbOfPage: 0,
+  isSearch: false,
+  inputValue: "",
 };
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -22,8 +24,13 @@ const postReducer = (state = initialState, action) => {
         data.push(item);
       });
 
+      if (state.isSearch) {
+        state.newsFeed = [];
+      }
+
       return {
         ...state,
+        isSearch: false,
         newsFeed: state.newsFeed.concat(data),
       };
 
@@ -31,6 +38,18 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         nbOfPage: state.nbOfPage + 1,
+      };
+
+    case IS_SEARCH:
+      return {
+        ...state,
+        isSearch: action.isSearch,
+      };
+
+    case INPUT_VALUE:
+      return {
+        ...state,
+        inputValue: action.value,
       };
     default:
       return state;
