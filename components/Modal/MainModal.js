@@ -13,11 +13,10 @@ import {
 import PropTypes from "prop-types";
 
 const MainModal = (props) => {
-  const link = props.link;
-  const onShare = useCallback(async () => {
+  const onShare = async (link) => {
     try {
       const result = await Share.share({
-        message: "LINK : " + link,
+        message: link,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -31,7 +30,7 @@ const MainModal = (props) => {
     } catch (error) {
       alert(error.message);
     }
-  }, [link]);
+  };
 
   return (
     <Modal visible={props.visible} animationType="slide">
@@ -70,7 +69,7 @@ const MainModal = (props) => {
             <CardItem footer bordered>
               <View style={styles.centered}>
                 <Button
-                  onPress={onShare}
+                  onPress={() => onShare(props.data.link)}
                   transparent
                   textStyle={{ color: "#87838B" }}
                 >

@@ -38,6 +38,8 @@ const MainScreen = () => {
     setIsAddMode(true);
   };
 
+
+
   if (isLoading) {
     return (
       <View style={styles.centered}>
