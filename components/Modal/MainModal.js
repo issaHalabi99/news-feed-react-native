@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, Image, Modal, StyleSheet, Share } from "react-native";
 import {
   Container,
@@ -13,6 +13,26 @@ import {
 import PropTypes from "prop-types";
 
 const MainModal = (props) => {
+  const link = props.link;
+  const onShare = useCallback(async () => {
+    try {
+      const result = await Share.share({
+        message: "LINK : " + link,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }, [link]);
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <Container
@@ -50,11 +70,7 @@ const MainModal = (props) => {
             <CardItem footer bordered>
               <View style={styles.centered}>
                 <Button
-                  onPress={() => {
-                    Share.share({
-                      message: `Link: ${props.link}`,
-                    })
-                  }}
+                  onPress={onShare}
                   transparent
                   textStyle={{ color: "#87838B" }}
                 >

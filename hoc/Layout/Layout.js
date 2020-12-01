@@ -43,7 +43,7 @@ const Layout = () => {
                       dispatch(ordersActions.getData()).then(() => {
                         setSpin(false);
                       });
-                    }, 3000)}
+                    }, 500)}
                   />
                   <Icon name="ios-people" />
                 </Item>
